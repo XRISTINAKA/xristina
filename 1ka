@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+
+import storm.locals as storms
+
+class Meazon(storms.Storm):
+    __storm_table__ = 'Meazon'
+    ieee            = storms.Int(primary=True)
+    serial          = storms.Unicode() 
+
+    def __init__(self, id, image, code, bizy, retail, fixed, reseller):
+        __storm_table__ = "Meazon"
+        id = storms.Int()
+        image = storms.Unicode()
+        code = storms.Unicode(primary = True)
+        bizy = storms.Unicode()
+        retail = storms.Int()
+        fixed = storms.Int()
+        reseller = storms.Int()
+        return
+
+#    def __eq__(self, other):
+#        self.ieee        == other.ieee
+#        self.serial      == other.serial
+#        return
+
+#    def __ne__(self, other):
+#        return not (self == other)
+
+def CreateTables():
+    db = storms.create_database('sqlite:' + 'meazon10.db')
+    store = storms.Store(db)
+    store.execute(
+    """CREATE TABLE IF NOT EXISTS Meazon (
+       id INTEGER,
+       image  VARCHAR(32),
+       code VARCHAR(16) PRIMARY KEY,
+       bizy VARCHAR(500),
+       retail INTEGER,
+       fixed INTEGER,
+       reseller INTEGER
+    ) """)
+
+    store.commit()
+
+def CreateProfiles():
+
+    store.execute(
+    """CREATE TABLE IF NOT EXISTS Meazon (
+       id INTEGER,
+       image  VARCHAR(32),
+       code VARCHAR(16) PRIMARY KEY,
+       bizy VARCHAR(500),
+       retail INTEGER,
+       fixed INTEGER,
+       reseller INTEGER
+    ) """)
+
+
+    for devmap in (
+            (1,'IMG_035.jpg ','10-002-2-02-0001','Meazon bizy DinRail(63A) - includes 2 years Smart Energy Cloud Service.Wireless 3 phase energy meter with fixed current transformers for measurements up to 63Α and relay management output.',244,26,181),
+            (2,'DR Bizy 250A.png' '10-002-2-02-0004', 'Meazon bizy DinRail(63A) - includes 2 years Smart Energy Cloud Service.Wireless 3 phase energy meter with SPLIT CORE current transformers for measurements up to 63A and relay management output. ', 250, 26, 185),
+            (3,'IMG_035.jpg ','10-002-2-01-0007', 'Meazon bizy DinRail(5A) - includes 2 years Smart Energy Cloud Service.Wireless 3 phase energy meter with fixed current transformers for measurements up to 5Α and relay management output.', 244, 26, 181),
+            (4,'IMG_035.jpg ','10-002-2-01-0004', 'Meazon bizy DinRail(125A) - includes 2 years Smart Energy Cloud Service.Wireless 3 phase energy meter with fixed current transformers for measurements up to 125Α and relay management output.', 259, 26, 192),
+            (5,'DR Bizy 250A.png','10-002-2-01-0017', 'Meazon bizy DinRail (125A) - includes 2 years Smart Energy Cloud Service.Wireless 3 phase energy meter with SPLIT COREcurrent transformers for measurements up to 125A and relay management output. ', 289, 26, 214),
+            (6,'IMG_035.jpg ','10-002-2-01-0005', 'Meazon bizy DinRail(250A) - includes 2 years Smart Energy Cloud Service.Wireless 3 phase energy meter with fixed current transformers for measurements up to 250Α and relay management output.', 259, 26, 192),
+            (7,'DR Bizy 250A.png','10-002-2-01-0018', 'Meazon bizy DinRail (250A) - includes 2 years Smart Energy Cloud Service.Wireless 3 phase energy meter with SPLIT CORE current transformers for measurements up to 250A and relay management output. ', 307, 26, 227),
+            (8,'IMG_050.jpg','10-002-2-02-0002', 'Meazon bizy DinRail GPRS(63Α) - includes Smart Energy Cloud Service + GPRS service 2years.Wireless 3 phase energy meter with current transformer for measurements up to 63A and GPRS connectivity. ', 394, 23, 303),
+            (9,'DR GPRS 250A.png','10-002-2-02-0005', 'Meazon bizy DinRail GPRS(63Α) - includes Smart Energy Cloud  Service + GPRS service 2years.Wireless 3 phase energy meter with SPLIT COREcurrent transformers for measurements up to 63A and GPRS connectivity. ', 394, 23, 303),
+            (10,'IMG_050.jpg','10-002-2-01-0010', 'Meazon bizy DinRail GPRS(5Α) - includes Smart Energy Cloud Service + GPRS service 2years.Wireless 3 phase energy meter with current transformer for measurements up to 5A and GPRS connectivity. ', 394, 23, 303),
+            (11,'IMG_050.jpg','10-002-2-01-0008', 'Meazon bizy DinRail GPRS(125Α) - includes Smart Energy Cloud Service + GPRS service 2years.Wireless 3 phase energy meter with current transformer for measurements up to 125A and GPRS connectivity. ', 409, 23, 315),
+            (12,'DR GPRS 250A.png','10-002-2-01-0019', 'Meazon bizy DinRail GPRS(125Α) - includes Smart Energy Cloud Service + GPRS service 2years.Wireless 3 phase energy meter with SPLIT COREcurrent transformers for measurements up to 125A and GPRS connectivity. ', 439, 23, 338),
+            (13,'IMG_050.jpg','10-002-2-01-0009', 'Meazon bizy DinRail GPRS(250Α) - includes Smart Energy Cloud Service + GPRS service 2years.Wireless 3 phase energy meter with current transformer for measurements up to 250A and GPRS connectivity. ', 409, 23, 315),
+	        (14,'DR GPRS 250A.png','10-002-2-01-0020', 'Meazon bizy DinRail GPRS(250A) - includes Smart Energy Cloud Service + GPRS service 2years.Wireless 3 phase energy meter with SPLIT COREcurrent transformers for measurements up to 250A and GPRS connectivity. ', 457, 23, 352),
+            (15,'IMG_003.jpg','10-001-2-03-0001 (white)  10-001-2-03-0002 (black)   10-001-2-03-0003(grey)    10-001-2-03-0004 (blue)    10-001-2-03-0005 (orange)    10-001-2-03-0006 (pink) ','Meazon bizy WebPlug advanced- includes 2 years Smart Energy Service.Wireless single phase schuko energy meter with embedded relay for measurement and control of appliances up to 16A.,27,23,52),
+            (16,'Bizy Gateway.png','10-003-2-01-0008','Meazon bizy Gateway ZigBee Data collection and internet connectivity component.',120,20,96),
+            (17,'Hum + temp sensor.png','10-003-2-01-0009','Meazon bizy Gateway GPRS - ZigBee Data collection and internet connectivity component (GPRS).,210,20,168)
+            (18,'Motion sensor.png','10-005-2-01-0002','Meazon Temperature and Ηumidity sensor is a wireless ZigBee sensor powered by one CR2 Battery. Operating Temperature: 0 to 40°C.\n Shipping/Storage Temperature: -20 to 50°C.\n Humidity Range: 0 to 90% R.H.',69,15,59),
+            (19,'Hum + temp sensor.png','10-005-2-01-0004','Meazon Μoisture sensoris a wireless ZigBee sensor powered by one CR2 battery.The sensor is small, easy-to-use, and fits almost anywhere. Sit .the sensor directly on the ground and it will notify you if it detects the presence of water.',69,15,59),
+            (20,'Door alarm.png','10-005-2-01-0003','Meazon Door - Window and Temperature sensor is a wireless ZigBee sensor powered by one CR2 battery. The sensor consists of a base, mounted to the door or window frame and a magnet to be mounted to the movable part of the door or window.',69,15,59),
+            (21,'Motion sensor.png','10-005-2-01-0005','Meazon Motion sensor is a wireless ZigBee sensor powered by one CR2 battery that detects motion within its covered area.',69,15,0)
+            ):
+        serials = Meazon(*devmap)
+        try:
+            row = store.get(Meazon, devmap[2])
+            if row != serials:
+                store.remove(row)
+                raise
+        except Exception as e:
+            store.add(serials)
+
+
+def CloseStore(store):
+    store.close()
+    return
+
+def OpenTable():
+    db = storms.create_database('sqlite:' + 'devdes.db')
+    store = storms.Store(db)
+    return store
+
+
